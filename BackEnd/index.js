@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import axios from "axios";
 import connecDB from "./database/connection.js";
 import userLogin from "./auth/userLogin.js";
+import refreshToken from "./auth/refreshToken.js";
 connecDB();
 //Intializing the express app
 const app = express();
@@ -12,6 +13,7 @@ app.use(bodyParser.json());
 //All the imported routes are used to make them available
 app.use(userSignUp);
 app.use(userLogin);
+app.use(refreshToken);
 
 //opens the server on port 3000 and an callback function
 app.listen(3000, () => {
