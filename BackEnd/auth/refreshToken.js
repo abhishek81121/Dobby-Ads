@@ -34,6 +34,7 @@ refreshToken.post("/refreshToken", (req, res) => {
                 { Email: Email },
                 { Access: newAccess, Refresh: newRefresh }
               );
+              res.json({ Access: newAccess, Refresh: newRefresh });
             } else {
               res.status(400).json({
                 message:
