@@ -5,10 +5,18 @@ import axios from "axios";
 import connecDB from "./database/connection.js";
 import userLogin from "./auth/userLogin.js";
 import refreshToken from "./auth/refreshToken.js";
+import cors from "cors";
 connecDB();
+const corsOptions = {
+  origin: "http://localhost:3000", // Allow requests from this origin
+  methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+  allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+};
 //Intializing the express app
 const app = express();
 app.use(bodyParser.json());
+app.use(cors(corsOptions));
+
 // app.use(bodyParser.urlencoded({ extended: false }));
 //All the imported routes are used to make them available
 app.use(userSignUp);

@@ -9,6 +9,7 @@ export default function Home() {
         linkText="Login"
         href="/"
         buttonText="Sign Up"
+        api="userSignUp"
       ></FormForAuth>
     </div>
   );

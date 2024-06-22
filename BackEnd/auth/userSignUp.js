@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import { userAuthDetail } from "../database/userSchema.js";
 var userSignUp = express.Router();
 //handling the post request for signing  up
-userSignUp.post("/signUp", (req, res) => {
+userSignUp.post("/userSignUp", (req, res) => {
   bcrypt.genSalt(10, function (err, salt) {
     bcrypt.hash(req.body.Password, salt, async function (err, hash) {
       const data = {

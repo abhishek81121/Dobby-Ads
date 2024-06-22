@@ -1,6 +1,4 @@
 import FormForAuth from "@/components/form";
-import { Input } from "@nextui-org/react";
-import { Button, ButtonGroup } from "@nextui-org/react";
 export default function Home() {
   return (
     <div className="h-screen w-full dark:bg-black bg-white  dark:bg-grid-white/[0.2] bg-grid-black/[0.2] relative flex items-center justify-center">
@@ -11,6 +9,7 @@ export default function Home() {
         linkText="Sign Up"
         href="/signup"
         buttonText="Login"
+        api="userLogin"
       ></FormForAuth>
     </div>
   );
