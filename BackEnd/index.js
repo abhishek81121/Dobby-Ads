@@ -16,11 +16,11 @@ app.use(userLogin);
 app.use(refreshToken);
 
 //opens the server on port 3000 and an callback function
-app.listen(3000, () => {
-  console.log("Server has started listening on port 3000");
+app.listen(3001, () => {
+  console.log("Server has started listening on port 3001");
 });
 axios
-  .post("http://127.0.0.1:3000/userLogin", {
+  .post("http://127.0.0.1:3001/userLogin", {
     Email: "abhishek",
     Password: "abhishek",
   })
