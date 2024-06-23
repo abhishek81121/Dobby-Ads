@@ -19,11 +19,11 @@ export default function RootLayout({
     <html lang="en">
       <head></head>
 
-      <body className={inter.className}>
+      <body className={`dark ${inter.className}`}>
         {" "}
         <NextUIProvider>
           {" "}
-          <main className="dark">{children}</main>
+          <main className="">{children}</main>
         </NextUIProvider>
       </body>
     </html>

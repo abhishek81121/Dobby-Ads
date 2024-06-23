@@ -4,6 +4,7 @@ import { Button, ButtonGroup } from "@nextui-org/react";
 import axios from "axios";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { cookies } from "next/navigation";
 
 function FormForAuth(props) {
   const router = useRouter();
@@ -18,8 +19,14 @@ function FormForAuth(props) {
       })
       .then((response) => {
         console.log();
-        if (apiURL == "userLogin") router.push("/home");
-        else router.push("/");
+        if (apiURL == "userLogin") {
+          router.push("/home");
+          cookies().set("Username", email);
+          cookies().set("Access", response.data.Access);
+          cookies().set("Access", response.data.Refresh);
+        } else {
+          router.push("/");
+        }
       })
       .catch((e) => {
         setError(e.response.data.message);
