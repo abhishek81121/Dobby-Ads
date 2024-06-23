@@ -32,11 +32,11 @@ userLogin.post("/userLogin", async (req, res) => {
         }
         //user email was not found in the database
         else {
-          res.json({ message: "Password is wrong" });
+          res.status(401).json({ message: "Password is wrong" });
         }
       });
     } else {
-      res.json({ message: "No Account found" });
+      res.status(401).json({ message: "No Account found" });
     }
   });
 });

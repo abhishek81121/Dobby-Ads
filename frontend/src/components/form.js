@@ -3,20 +3,28 @@ import { Input, Link } from "@nextui-org/react";
 import { Button, ButtonGroup } from "@nextui-org/react";
 import axios from "axios";
 import { useState } from "react";
-function handleSubmission(email, password, apiURL) {
-  axios
-    .post(`http://127.00.1:3001/${apiURL}`, {
-      Email: email,
-      Password: password,
-    })
-    .then((response) => {
-      console.log(response);
-    });
-  console.log(`http://127.00.1:3001/${apiURL}`);
-}
+import { useRouter } from "next/navigation";
+
 function FormForAuth(props) {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  function handleSubmission(email, password, apiURL) {
+    axios
+      .post(`http://127.00.1:3001/${apiURL}`, {
+        Email: email,
+        Password: password,
+      })
+      .then((response) => {
+        console.log();
+        if (apiURL == "userLogin") router.push("/home");
+        else router.push("/");
+      })
+      .catch((e) => {
+        setError(e.response.data.message);
+      });
+  }
   return (
     <div className="absolute h-3/5 w-2/6 bg-black border-2 border-gray-700 rounded-lg flex flex-col justify-evenly">
       <div className="text-3xl font-bold p-2 w-full text-center">
@@ -55,6 +63,7 @@ function FormForAuth(props) {
       <div className="font-medium p-3 text-right underline">
         <Link href={props.href}>{props.linkText} &rarr;</Link>
       </div>
+      <div className="font-medium p-1 text-center text-red-700">{error}</div>
     </div>
   );
 }
