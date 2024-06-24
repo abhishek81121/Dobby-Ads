@@ -9,9 +9,11 @@ import {
   ModalFooter,
 } from "@nextui-org/react";
 import { ChangeEvent, useState } from "react";
+import { getCookie } from "cookies-next";
+import axios from "axios";
 export default function Home() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [file, setFile] = useState<File>();
+  const [file, setFile] = useState<File | null>();
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     try {
       if (e.target.files) {
@@ -46,6 +48,7 @@ export default function Home() {
                 <input
                   type="file"
                   accept="image/*"
+                  placeholder={file?.name}
                   onChange={handleFileChange}
                 ></input>
               </ModalBody>
@@ -53,7 +56,23 @@ export default function Home() {
                 <Button color="danger" variant="light" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={onClose}>
+                <Button
+                  color="primary"
+                  onPress={async () => {
+                    if (file != null) {
+                      const formData = new FormData();
+                      formData.append("image", file);
+                      formData.append("Email", getCookie("Email") as string);
+                      await axios
+                        .post("http://127.0.0.1:3001/image/upload", formData, {
+                          headers: { "Content-Type": "multipart/form-data" },
+                        })
+                        .then((response) => {});
+                    }
+                    setFile(null);
+                    onClose();
+                  }}
+                >
                   Upload
                 </Button>
               </ModalFooter>

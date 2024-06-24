@@ -6,6 +6,7 @@ import connecDB from "./database/connection.js";
 import userLogin from "./auth/userLogin.js";
 import refreshToken from "./auth/refreshToken.js";
 import cors from "cors";
+import imageStore from "./Image/ImageStore.js";
 connecDB();
 const corsOptions = {
   origin: "http://localhost:3000", // Allow requests from this origin
@@ -22,6 +23,7 @@ app.use(cors(corsOptions));
 app.use(userSignUp);
 app.use(userLogin);
 app.use(refreshToken);
+app.use(imageStore);
 
 //opens the server on port 3000 and an callback function
 app.listen(3001, () => {
